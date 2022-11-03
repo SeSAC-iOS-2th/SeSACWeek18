@@ -33,7 +33,7 @@ extension SeSACAPI {
             return ["Content-Type": "application/x-www-form-urlencoded"]
         case .profile:
             return [
-                "Authorization": "Bearer \(UserDefaults.standard.string(forKey: "token")!)",
+                "Authorization": "Bearer \(UserDefaults.standard.string(forKey: "token")!)", //propertyWrapper 5.1
                 "Content-Type": "application/x-www-form-urlencoded"
             ]
         }
@@ -43,16 +43,18 @@ extension SeSACAPI {
         
         switch self {
         case .signup(let username, let email, let password):
-            [
+            return [
                 "userName": username,
                 "email": email,
                 "password": password
             ]
         case .login(let email, let password):
-            [
+            return [
                 "email": email,
                 "password": password
             ]
         default: return ["":""]
+        }
     }
+    
 }
